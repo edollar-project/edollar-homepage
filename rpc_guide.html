@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Electronic dollar | Edollar | EDL | Seure Private Crypto Currency">
+    <meta name="author" content="Electronic dollar | Edollar | EDL">
+
+    <title>Electronic Dollar Secure Private Crypto Currency EDL Coin - RPC Calls Guide</title>
+    <link rel="icon" type="image/png" href="https://Edollar.cash/favicon.png">
+    <!-- Bootstrap core CSS -->
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom fonts for this template -->
+    <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic,900,900italic' rel='stylesheet' type='text/css'>
+
+    <!-- Plugin CSS -->
+    <link href="vendor/magnific-popup/magnific-popup.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="css/creative.min.css" rel="stylesheet">
+    <style type="text/css">
+      .footer {
+        color: #f7f5f2;
+        background: #222;
+        padding-top: 2em;
+        padding-bottom: 2em;
+        border-top: 1px solid #8cc1c1;
+      }
+      .copy-right {
+        text-align: center;
+        font-size: 14px!important;
+        margin-top: 15px;
+      }    
+      .align-jstify {
+        text-align: left;
+      }
+      .white-color {
+        color: #fff;
+      }
+      .tool {
+        font-size: 18px!important;
+      }
+      .tool-item {
+        margin-top: 2px!important;
+        margin-bottom: 2px!important;
+        font-size: 14px!important;
+      }
+      .small-margin {
+        margin-top: 5px!important;
+        margin-bottom: 5px!important;
+      }
+	  .center-block {margin:0 auto;}
+	  .box-shadowed {box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); padding: 10px 20px;}
+	  ul.rpc-index li {display:inline-block; width:100%;}
+	  .highlighter-rouge {background: beige;}
+	  code, pre  {
+  -ms-word-break: break-all;
+  word-break: break-all;
+
+  /* Non standard for webkit */
+  word-break: break-word;
+
+  -webkit-hyphens: auto;
+  -moz-hyphens: auto;
+  hyphens: auto;
+  
+}
+
+#json-rpc-methods {padding-top:20px;}
+.full-hr {    max-width: 90%;
+    border-color: bisque;}
+
+    </style>
+  </head>
+
+  <body id="page-top">
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+      <div class="container">
+        <a class="navbar-brand js-scroll-trigger" href="#page-top">Electronic Dollar</a>
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+              <a class="nav-link js-scroll-trigger" href="https://edollar.cash/#page-top">About</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link js-scroll-trigger" href="https://edollar.cash/#features">Features</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link js-scroll-trigger" href="https://edollar.cash/#download">Download</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link js-scroll-trigger" href="https://edollar.cash/#community">Community</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link js-scroll-trigger" href="https://edollar.cash/#tool">Tool</a>
+            </li>
+			
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <header class="">
+		<div class="jumbotron jumbotron-fluid text-center">
+		<div class="container">
+		<h1 class="display-4">EDL Wallet RPC documentation</h1>
+		</div>
+		</div>
+    </header>
+
+<section id="guide">
+<div class="row align-items-center">
+<div class="col-lg-9 center-block">
+<div class="info-block text-adapt guide-parent box-shadowed">
+<br/>
+<h3 id="index-of-json-rpc-methods" class="text-center">Index of JSON RPC Methods:</h3>
+<br/>
+<div class="row">
+<div class="col ">
+<ul class="text-center rpc-index">
+  <li><a href="#getbalance">getbalance</a></li>
+  <li><a href="#get_transfers">get_transfers</a></li>
+  <li><a href="#open_wallet">open_wallet</a></li>
+</ul>
+</div>
+<div class="col ">
+<ul class="text-center rpc-index">
+	<li><a href="#create_address">create_address</a></li>
+	<li><a href="#get_transfer_by_txid">get_transfer_by_txid</a></li>  
+</ul>
+</div>
+<div class="col ">
+<ul class="text-center rpc-index">
+  <li><a href="#incoming_transfers">incoming_transfers</a></li>
+  <li><a href="#create_wallet">create_wallet</a></li> 
+</ul>
+</div>
+</div>
+
+<br/>
+
+<h3 id="start"><strong>Start rpc wallet</strong></h3>
+<code>./Edollar-wallet-rpc --wallet-file airdrop1 --rpc-bind-port 8888 --disable-rpc-login</code>
+<hr class="full-hr">
+<br/>
+<h2 id="json-rpc-methods" class="text-center">JSON RPC Methods:</h2>
+<h3 id="getbalance"><strong>getbalance</strong></h3>
+<p>Return the wallet's balance.</p>
+<p>Inputs: <em>None</em>.</p>
+<p>Outputs:</p>
+<ul>
+  <li><em>balance</em> - unsigned int; The total balance of the current Edollar-wallet-rpc in session.</li>
+  <li><em>unlocked_balance</em> - unsigned int; Unlocked funds are those funds that are sufficiently deep enough in the Edollar blockchain to be considered safe to spend.</li>
+</ul>
+
+<p>Example:</p>
+<div class="highlighter-rouge">
+<pre class="highlight">
+<code>
+curl -X POST http://127.0.0.1:8888/json_rpc -d '{"jsonrpc":"2.0","id":"0","method":"getbalance"}' -H 'Content-Type: application/json'
+
+{
+  "id": "0",
+  "jsonrpc": "2.0",
+  "result": {
+    "balance": 223242555240000,
+    "per_subaddress": [{
+      "address": "edqKUGWa84y752hbSMyzQU268JQW7NdJ4ZgT4WTWChjBhhpeYHKTDBi3KrhRbQGk3qBHWnG3UyWpk66ea7AJLmUY2iqTozWX4",
+      "address_index": 0,
+      "balance": 223214025240000,
+      "label": "Primary account",
+      "num_unspent_outputs": 1,
+      "unlocked_balance": 223214025240000
+    },{
+      "address": "es3a5YwWNKWSPHwxX9XEcvFWpdfGZE8LKYnZ4stKdscYG4jJP51RQTZ9G14AHojtTEQVyLCxxr6eQQDNxbQyyEHR31jqBYBkn",
+      "address_index": 1,
+      "balance": 28530000000,
+      "label": "addr1",
+      "num_unspent_outputs": 5,
+      "unlocked_balance": 28530000000
+    }],
+    "unlocked_balance": 223242555240000
+  }
+}
+</code>
+</pre>
+</div>
+
+<hr class="full-hr">
+<h3 id="create_address"><strong>create_address</strong></h3>
+
+<p>Create new sub address</p>
+
+<p>Inputs: </p>
+<ul>
+  <li><em>label</em> - label of address. It can be null</li>
+</ul>
+<p>Outputs:</p>
+
+
+<ul>
+  <li><em>address</em> - sub address</li>
+  <li><em>address_index</em>- index of sub address</li>
+</ul>
+
+<p>Example:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>
+curl -X POST http://127.0.0.1:8888/json_rpc -d '{"jsonrpc":"2.0","id":"0","method":"create_address","params":{"label":"user1"}}' -H 'Content-Type: application/json'
+
+{
+  "id": "0",
+  "jsonrpc": "2.0",
+  "result": {
+    "address": "es2U2ZWX2PKGuzY5RHC44ED1UXwyMu6GU6GGeY653b8L9dGkxNrVDdiGxEheirmd2HGUemEBWMp1RLS3PRd4BUcM18RjesemC",
+    "address_index": 2
+  }
+}
+</code></pre>
+</div>
+
+<hr class="full-hr">
+<h3 id="incoming_transfers"><strong>incoming_transfers</strong></h3>
+<p>Get received transaction</p>
+<p>Return a list of incoming transfers to the wallet.</p>
+<p>Inputs: </p>
+<ul>
+  <li><em> transfer_type </em> string; "all": all the transfers, "available": only transfers which are not yet spent, OR "unavailable": only transfers which are already spent.</li>
+  <li><em>subaddr_indices </em> - list of sub address we want to get incoming transfer</li>
+</ul>
+<p>Outputs:</p>
+<ul>
+ <li><em>transfers</em> - list of:</li>
+ <li><em>amount</em> - unsigned int</li>
+ <li><em>spent</em> - boolean</li>
+ <li><em>subaddr_index</em> - index of sub address</li>
+<li><em>global_index</em> - unsigned int; Mostly internal use, can be ignored by most users.</li>
+ <li><em>tx_hash</em> - string; Several incoming transfers may share the same hash if they were in the same transaction.</li>
+<li><em>tx_size</em> - unsigned int</li>
+<li><em></em></li>
+</ul>
+
+<p>Example:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>
+curl -X POST http://127.0.0.1:8888/json_rpc -d '{"jsonrpc":"2.0","id":"0","method":"incoming_transfers",params":{"transfer_type":"all", "subaddr_indices": [1]}}' -H 'Content-Type: application/json'
+
+{
+  "id": "0",
+  "jsonrpc": "2.0",
+  "result": {
+    "transfers": [{
+      "amount": 2896000000,
+      "global_index": 23365,
+      "spent": true,
+      "subaddr_index": 1,
+      "tx_hash": "be5e7a7d0a0a3fc50c6d30ebcf8268d0cfe4b2ca67aee6a270889020024faa21",
+      "tx_size": 1187
+    },{
+      "amount": 7666000000,
+      "global_index": 23596,
+      "spent": true,
+      "subaddr_index": 1,
+      "tx_hash": "89cf1427a5ba5b17d63e58f99a0d0a8f403b2c52fd885036b99fbc0bb1c6eddd",
+      "tx_size": 1120
+    },{
+      "amount": 5116000000,
+      "global_index": 24440,
+      "spent": false,
+      "subaddr_index": 1,
+      "tx_hash": "0c7255250e9a9460d1212ebcf9a353032ae7306d4b0728b2ed20fc3988683450",
+      "tx_size": 1187
+    }]
+  }
+}
+</code></pre>
+</div>
+
+<hr class="full-hr">
+<h3 id="get_transfers"><strong>get_transfers</strong></h3>
+<p>Returns a list of transfers.</p>
+<p>Inputs: </p>
+<ul>
+<li><em>label</em> - label of address. It can be null</li>
+ <!-- <li><em></em></li>-->
+<li><em>in</em> - boolean;</li>
+<li><em>out</em> - boolean;</li>
+<li><em>pending</em> - boolean;</li>
+<li><em>failed</em> - boolean;</li>
+<li><em>pool</em> - boolean;</li>
+<li><em>filter_by_height</em> - boolean;</li>
+<li><em>min_height</em> - unsigned int;</li>
+<li><em>max_height</em> - unsigned int;</li>
+
+</ul>
+<p>Outputs:</p>
+<ul>
+<li><em>in</em>  - array of transfers:</li>
+<li><em>txid</em> - string;</li>
+<li><em>height</em> - unsigned int;</li>
+<li><em>timestamp</em> - unsigned int;</li>
+<li><em>amount</em> - unsigned int;</li>
+<li><em>fee</em> - unsigned int;</li>
+<li><em>note</em> - string;</li>
+<li><em>destinations</em> - std::list;</li>
+<li><em>type</em> - string;</li>
+<li><em>out</em> - array of transfers</li>
+<li><em>pending</em> - array of transfers</li>
+<li><em>failed</em> - array of transfers</li>
+<li><em>pool</em> - array of transfers</li>
+
+</ul>
+
+<p>Example:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>
+curl -X POST http://127.0.0.1:8888/json_rpc -d '{"jsonrpc":"2.0","id":"0","method":"get_transfers","paras":{"out":true}}' -H 'Content-Type: application/json'
+
+{
+  "id": "0",
+  "jsonrpc": "2.0",
+  "result": {
+    "out": [{
+      "amount": 3600000000000,
+      "fee": 113280000,
+      "height": 2010,
+      "note": "",
+      "subaddr_index": {
+        "major": 0,
+        "minor": 0
+      },
+      "timestamp": 1514283266,
+      "txid": "3ac5f35852a3a08d00b1d5bcc8a1ffe40405da11c1e506453d3444519e2bcefa",
+      "type": "out",
+      "unlock_time": 0
+    },{
+      "amount": 6000000000000,
+      "destinations": [{
+        "address": "edrG6Zodth2ixqWy6Pgqg3Vpdvv1KsYWCSkEGMueRMUT3BHkKvdqMsQJpb12nEdxMNMWoYn28zL9iULwVvNUk59h1d6WTrUpR",
+        "amount": 200000000000
+      },{
+        "address": "edr8Qs4oqm86V711NhoHjvcabtAC4qqjJa5nieYg2Wb6W8KyzPaEzxDAcKZAFvXEnbTgknjT5hVEREBFzQt3f3hz1EZ32onQQ",
+        "amount": 200000000000
+      },{
+        "address": "edqTRnEgRxWhvDX4PYDV69Qs9h21u1hDQDGsLFbgxfGMKAdtJS7H7RQXZ6TnXVFUgX18jzzpcNEtfcuDH73Y7Yxb1kd8rsPRF",
+        "amount": 200000000000
+      }
+    }]
+  }
+}
+</code></pre>
+</div>
+
+<hr class="full-hr">
+<h3 id="get_transfer_by_txid"><strong>get_transfer_by_txid</strong></h3>
+<p>Show information about a transfer to/from this address.</p>
+<p>Inputs: </p>
+<ul>
+  <li><em>txid</em> - string</li>
+</ul>
+<p>Outputs:</p>
+<ul>
+<!-- <li><em></em></li>-->
+<li><em>transfer</em> - JSON object containing parment information:</li>
+<li><em>amount</em> - unsigned int</li>
+<li><em>fee</em> - unsigned int</li>
+<li><em>height</em> - unsigned int</li>
+<li><em><li><em>note</em> - string</li>
+<li><em>timestamp</em> - unsigned int</li>
+<li><em>txid</em> - string</li>
+<li><em>type</em> - string</li>
+</ul>
+<p>Example:</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>
+curl -X POST http://localhost:8888/json_rpc -d '{"jsonrpc":"2.0","id":"0","method":"get_transfer_by_txid","params":{"txid":"df4efc6924dd31b34dcb87669ab2bf2e8e6fc76c85f8a26e42482ba5c8bb8249"}}' -H 'Content-Type: application/json'
+
+{
+  "id": "0",
+  "jsonrpc": "2.0",
+  "result": {
+    "transfer": {
+      "amount": 210000000000000,
+      "destinations": [{
+        "address": "edqqk3tc4h1h8Y1bruPSuAWRzwbhbkJyEP1jgELBiFwLCRBZDeSiUzS867dnWJP4ixe9unAhvR25M7TWsBNEC6br1uRGt5Uds",
+        "amount": 10000000000000
+      },{
+        "address": "edpkcsiFRgLAyBdroCMJ6WchVM6jkak8GZQd9QugjksH1r6hY33R6ZZetUnAhbFogVDPG77AC7zZV7nubdiah9Gu1QZXVz4aS",
+        "amount": 200000000000000
+      }],
+      "fee": 18240000,
+      "height": 23153,
+      "note": "",
+      "subaddr_index": {
+        "major": 0,
+        "minor": 0
+      },
+      "timestamp": 1516761164,
+      "txid": "df4efc6924dd31b34dcb87669ab2bf2e8e6fc76c85f8a26e42482ba5c8bb8249",
+      "type": "out",
+      "unlock_time": 0
+    }
+  }
+}
+</code></pre>
+</div>
+
+<!-- entry start -->
+<hr class="full-hr">
+<h3 id="create_wallet"><strong>create_wallet</strong></h3>
+<p>Create a new wallet. You need to have set the argument "–wallet-dir" when launching edollar-wallet-rpc to make this work.</p>
+<p>Inputs: </p>
+<ul>
+<li><em>filename</em> - string;</li>
+<li><em>password</em> - string;</li>
+<li><em>language</em> - string; Language for your wallets' seed.</li>
+</ul>
+<p>Outputs: none</p>
+<p>Example:</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>
+
+curl -X POST http://localhost:18082/json_rpc -d '{"jsonrpc":"2.0","id":"0","method":"create_wallet","params":{"filename":"mytestwallet","password":"mytestpassword","language":"English"}}' -H 'Content-Type: application/json'
+
+</code></pre>
+</div>
+<!-- entry end -->
+
+<!-- entry start -->
+<hr class="full-hr">
+<h3 id="open_wallet"><strong>open_wallet</strong></h3>
+<p>Open a wallet. You need to have set the argument "–wallet-dir" when launching edollar-wallet-rpc to make this work</p>
+<p>Inputs: </p>
+<ul>
+<li><em>filename</em> - string;</li>
+<li><em>password</em> - string;</li>
+</ul>
+<p>Outputs: none</p>
+<p>Example:</p>
+<div class="highlighter-rouge"><pre class="highlight">
+<code>
+
+curl -X POST http://localhost:18082/json_rpc -d '{"jsonrpc":"2.0","id":"0","method":"open_wallet","params":{"filename":"mytestwallet","password":"mytestpassword"}}' -H 'Content-Type: application/json'
+
+</code></pre>
+</div>
+<!-- entry end -->
+
+
+
+</div><!-- col -->
+</div><!-- row -->
+    </section>
+<!-- guide -->
+    
+<div class="footer" id="tool" >
+  <div class="container">
+    <div class="row">
+        <div class="col-lg-4 text-center">
+          <i class="fa fa-anchor tool"> Mining Pool</i>
+          <p class="tool-item">
+            <a target="_blank" href="http://pool.electronicdollar.org/" class="white-color">Official pool (1)</a>
+          </p>
+          <p class="tool-item"p>
+            <a target="_blank" href="https://pool.Edollar.cash" class="white-color">Official pool (2)</a>
+            </p>
+          </p>
+          <p class="tool-item">
+            <a target="_blank" href="https://pool.Edollar.cash" class="white-color">Others pools</a>
+          </p>
+        </div>
+        <div class="col-lg-4 text-center">
+          <i class="fa fa-cubes tool"> Block Explorer</i>
+          <p class="tool-item">
+            <a target="_blank" href="https://explorer.Edollar.cash" class="white-color">https://explorer.Edollar.cash</a>
+          </p>
+        </div>
+        <div class="col-lg-4 text-center">
+            <i class="fa fa-address-card-o tool"> Generate Wallet</i>
+            <p class="tool-item">
+              <a target="_blank" href="https://Edollar.cash/wallet_generator.html" class="white-color">Generate Online</a>
+            </p>
+            <p class="tool-item">
+                <a target="_blank" href="https://github.com/Edollar-project/Edollar-wallet-generator" class="white-color">Generate Offline</a>
+              </p>
+          </div>
+    </div>
+  </div>
+  <div class="copy-right">copyright © 2017 Edollar project</div>
+  
+</div>
+    <!-- Bootstrap core JavaScript -->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Plugin JavaScript -->
+    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+    <script src="vendor/scrollreveal/scrollreveal.min.js"></script>
+    <script src="vendor/magnific-popup/jquery.magnific-popup.min.js"></script>
+
+    <!-- Custom scripts for this template -->
+    <script src="js/creative.min.js"></script>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-111603243-1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'UA-111603243-1');
+    </script>
+
+  </body>
+
+</html>
