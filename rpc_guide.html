@@ -1,0 +1,818 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Electronic dollar | Edollar | EDL | Seure Private Crypto Currency">
+    <meta name="author" content="Electronic dollar | Edollar | EDL">
+
+    <title>Electronic Dollar Secure Private Crypto Currency EDL Coin - Edollar Wallet RPC Guide</title>
+    <link rel="icon" type="image/png" href="https://Edollar.cash/favicon.png">
+    <!-- Bootstrap core CSS -->
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom fonts for this template -->
+    <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic,900,900italic' rel='stylesheet' type='text/css'>
+
+    <!-- Plugin CSS -->
+    <link href="vendor/magnific-popup/magnific-popup.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="css/creative.min.css" rel="stylesheet">
+    <style type="text/css">
+      .footer {
+        color: #f7f5f2;
+        background: #222;
+        padding-top: 2em;
+        padding-bottom: 2em;
+        border-top: 1px solid #8cc1c1;
+      }
+      .copy-right {
+        text-align: center;
+        font-size: 14px!important;
+        margin-top: 15px;
+      }    
+      .align-jstify {
+        text-align: left;
+      }
+      .white-color {
+        color: #fff;
+      }
+      .tool {
+        font-size: 18px!important;
+      }
+      .tool-item {
+        margin-top: 2px!important;
+        margin-bottom: 2px!important;
+        font-size: 14px!important;
+      }
+      .small-margin {
+        margin-top: 5px!important;
+        margin-bottom: 5px!important;
+      }
+	  .center-block {margin:0 auto;}
+	  .box-shadowed {box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); padding: 10px 20px;}
+	  ul.rpc-index li {display:inline-block; width:100%;color:#004a7c}
+	  .highlighter-rouge {background: beige;}
+	  code, pre  {
+  -ms-word-break: break-all;
+  word-break: break-all;
+
+  /* Non standard for webkit */
+  word-break: break-word;
+
+  -webkit-hyphens: auto;
+  -moz-hyphens: auto;
+  hyphens: auto;
+  
+}
+
+#json-rpc-methods {padding-top:20px;}
+.full-hr {    max-width: 90%;
+    border-color: #fff;}
+
+    </style>
+  </head>
+
+  <body id="page-top">
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+      <div class="container">
+        <a class="navbar-brand js-scroll-trigger" href="#page-top">Electronic Dollar</a>
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+              <a class="nav-link js-scroll-trigger" href="https://edollar.cash/#page-top">About</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link js-scroll-trigger" href="https://edollar.cash/#features">Features</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link js-scroll-trigger" href="https://edollar.cash/#download">Download</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link js-scroll-trigger" href="https://edollar.cash/#community">Community</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link js-scroll-trigger" href="https://edollar.cash/#tool">Tool</a>
+            </li>
+			
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <header class="">
+		<div class="jumbotron jumbotron-fluid text-center" style="background-color:#004a7c">
+		<div class="container">
+		<h1 class="display-4" style="color:#fff">EDL Wallet RPC documentation</h1>
+		</div>
+		</div>
+    </header>
+
+<section id="guide">
+<div class="row align-items-center">
+<div class="col-lg-10 center-block">
+<div class="info-block text-adapt guide-parent box-shadowed">
+<br/>
+<h3 id="index-of-json-rpc-methods" class="text-center"><strong>INTRODUCTION</strong></h3>
+<div class="row" style="margin: 10px">
+  This is a list of the edollar-wallet-rpc calls, their inputs and outputs, and examples of each. The program edollar-wallet-rpc replaced the rpc interface that was in edollar-wallet-cli.
+  All edollar-wallet-rpc methods use the same JSON RPC interface. 
+  Note: "atomic units" refer to the smallest fraction of 1 EDL according to the edollard implementation. 1 EDL = 1000000000 (1e9) atomic units.
+</div>
+<br/>
+
+<h4 id="start"><strong>Start rpc wallet</strong></h3>
+<code>./edollar-wallet-rpc --wallet-dir mydirectory --rpc-bind-port 8888</code>
+<div class="row" style="margin-left: 10px">
+  We can also specify which wallet to open 
+</div>
+<code>./edollar-wallet-rpc --wallet-file mywallet --rpc-bind-port 8888</code>
+<div class="row" style="margin-left: 10px">
+  And enable/disable rpc login
+</div>
+<code>./edollar-wallet-rpc --wallet-file mywallet --rpc-bind-port 8888 --disable-rpc-login</code> <div></div>
+<code>./edollar-wallet-rpc --wallet-file mywallet --rpc-bind-port 8888 --rpc-login username:password</code>
+<div class="row" style="margin-left: 10px">In case of enable rpc login, each rpc call needs to provide username:password like this</div> 
+<div class="highlighter-rouge">
+<pre class="highlight">
+<code>
+curl -u username:password --digest -X POST http://127.0.0.1:8888/json_rpc -d '{"jsonrpc":"2.0","id":"0","method":"getbalance"}' -H 'Content-Type: application/json'
+</code>
+</pre>
+</div>
+<div class="row" style="margin-left: 10px">
+  For simplicity, we disable rpc login in all following examples
+</div>
+
+</br>
+<h3 id="index-of-json-rpc-methods" class="text-center"><strong>Index of JSON RPC Methods</strong></h3>
+<br/>
+<div class="row">
+<div class="col ">
+<ul class="rpc-index">
+  <li><a href="#create_wallet">create_wallet</a></li> 
+  <li><a href="#open_wallet">open_wallet</a></li>
+  <li><a href="#stop_wallet">stop_wallet</a></li>
+</ul>
+</div>
+<div class="col ">
+<ul class="rpc-index">
+  <li><a href="#create_account">create_account</a></li>
+  <li><a href="#get_accounts">get_accounts</a></li>
+  <li><a href="#create_address">create_address</a></li>
+  <li><a href="#getaddress">getaddress</a></li>
+</ul>
+</div>
+<div class="col ">
+<ul class="rpc-index">
+  <li><a href="#transfer">transfer</a></li>
+  <li><a href="#sweep_all">sweep_all</a></li>
+  <li><a href="#rescan_spent">rescan_spent</a></li>
+</ul>
+</div>   
+<div class="col" style="margin-right: 30px">
+<ul class="rpc-index">
+  <li><a href="#getbalance">getbalance</a></li> 
+  <li><a href="#incoming_transfers">incoming_transfers</a></li>
+  <li><a href="#get_transfers">get_transfers</a></li>
+  <li><a href="#get_transfer_by_txid">get_transfer_by_txid</a></li> 
+</ul>
+</div>
+</div>
+
+
+<hr class="full-hr">
+<h3 id="create_wallet"><strong>create_wallet</strong></h3>
+<p>Create a new wallet. You need to have set the argument "–wallet-dir" when launching edollar-wallet-rpc to make this work.</p>
+<p>Inputs: </p>
+<ul>
+<li><em>filename</em> - string;</li>
+<li><em>password</em> - string;</li>
+<li><em>language</em> - string; Language for your wallets' seed.</li>
+</ul>
+<p>Outputs: none</p>
+<p>Example:</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>
+
+curl -X POST http://127.0.0.1:8888/json_rpc \
+-d '{"jsonrpc":"2.0","id":"0","method":"create_wallet","params":{"filename":"mytestwallet","password":"mytestpassword","language":"English"}}' \
+-H 'Content-Type: application/json'
+
+</code></pre>
+</div>
+
+<hr class="full-hr">
+<h3 id="open_wallet"><strong>open_wallet</strong></h3>
+<p>Open a wallet. You need to have set the argument "–wallet-dir" when launching edollar-wallet-rpc to make this work</p>
+<p>Inputs: </p>
+<ul>
+<li><em>filename</em> - string;</li>
+<li><em>password</em> - string;</li>
+</ul>
+<p>Outputs: none</p>
+<p>Example:</p>
+<div class="highlighter-rouge"><pre class="highlight">
+<code>
+curl -X POST http://127.0.0.1:8888/json_rpc \
+-d '{"jsonrpc":"2.0","id":"0","method":"open_wallet","params":{"filename":"mytestwallet","password":"mytestpassword"}}' \
+-H 'Content-Type: application/json'
+
+</code></pre>
+</div>
+
+<hr class="full-hr">
+<h3 id="stop_wallet"><strong>stop_wallet</strong></h3>
+<p>Stops the wallet, storing the current state.</p>
+<p>Inputs: None</p>
+<p>Outputs: None</p>
+<p>Example:</p>
+<div class="highlighter-rouge"><pre class="highlight">
+<code>
+curl -X POST http://127.0.0.1:8888/json_rpc \
+-d '{"jsonrpc":"2.0","id":"0","method":"stop_wallet"}' -H 'Content-Type: application/json'
+
+</code></pre>
+</div>
+
+<hr class="full-hr">
+<h3 id="create_account"><strong>create_account</strong></h3>
+<p>Create new sub account</p>
+<p>Inputs: </p>
+<ul>
+  <li><em>label</em> - label of account. It can be null</li>
+</ul>
+<p>Outputs:</p>
+<ul>
+  <li><em>account_index</em>- index of sub account</li>
+  <li><em>address</em> - sub account address</li> 
+</ul>
+<p>Example:</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>
+curl -X POST http://127.0.0.1:8888/json_rpc \
+-d '{"jsonrpc":"2.0","id":"0","method":"create_account","params":{"label":"user1"}}' \
+-H 'Content-Type: application/json'
+
+{
+  "id": "0",
+  "jsonrpc": "2.0",
+  "result": {
+    "account_index": 1,
+    "address": "es2tZAJogQa97dUJg4DjM9QWYEHD4JXmphJRVKRySVgrXP2FbdYvFCFgVwfPJR43skJKmJNg4ERs4Buj4jEG9hUf1tSb5hS11"
+  }
+}
+</code></pre>
+</div>
+
+<hr class="full-hr">
+<h3 id="get_accounts"><strong>get_accounts</strong></h3>
+<p>Get all accounts from wallet</p>
+<p>Inputs: None</p>
+<p>Outputs: List of account with following information</p>
+<ul>
+  <li><em>account_index</em>- index of sub account</li>
+  <li><em>balance</em> - balance of account</li> 
+  <li><em>base_address</em> - base address (address at index 0)</li> 
+  <li><em>label</em> - label of account</li> 
+  <li><em>unlocked_balance</em> - unlocked balance</li> 
+</ul>
+<p>Example:</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>
+curl -X POST http://127.0.0.1:8888/json_rpc \
+-d '{"jsonrpc":"2.0","id":"0","method":"get_accounts"}' \
+-H 'Content-Type: application/json'
+
+{
+  "id": "0",
+  "jsonrpc": "2.0",
+  "result": {
+    "subaddress_accounts": [{
+      "account_index": 0,
+      "balance": 0,
+      "base_address": "edrWdXoWoqbBxD5brMnL6Nj3cKM5RNjZo7DofP5HFrfCg6vrAdyoGbvfTpqtfKF3joi77LWckBgqidqygYv6wyyu2LcqrfcSQ",
+      "label": "Primary account",
+      "unlocked_balance": 0
+    },{
+      "account_index": 1,
+      "balance": 20000000000,
+      "base_address": "es2tZAJogQa97dUJg4DjM9QWYEHD4JXmphJRVKRySVgrXP2FbdYvFCFgVwfPJR43skJKmJNg4ERs4Buj4jEG9hUf1tSb5hS11",
+      "label": "user1",
+      "unlocked_balance": 20000000000
+    },{
+      "account_index": 2,
+      "balance": 30000000000,
+      "base_address": "es2r3QrSj3mag61DfsuprD7CqjueCx8wxLNmseTu1PdpdSh2yNtmmAXbm72tuagLEQGnMJrFFawXvG1w9L8mVQEK2oEv13aH2",
+      "label": "user2",
+      "unlocked_balance": 30000000000
+    }],
+    "total_balance": 50000000000,
+    "total_unlocked_balance": 50000000000
+  }
+}
+</code></pre>
+</div>
+
+
+<hr class="full-hr">
+<h3 id="create_address"><strong>create_address</strong></h3>
+<p>Create new sub address</p>
+<p>Inputs: </p>
+<ul>
+  <li><em>account_index</em> - index of sub account that address will belong to</li>
+  <li><em>label</em> - label of sub address. It can be null</li>
+</ul>
+<p>Outputs:</p>
+<ul>
+  <li><em>address</em> - sub address</li>
+  <li><em>address_index</em>- index of sub address</li>
+</ul>
+<p>Example:</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>
+curl -X POST http://127.0.0.1:8888/json_rpc \
+-d '{"jsonrpc":"2.0","id":"0","method":"create_address","params":{"account_index": 1,"label":"user1 first sub address"}}' \
+-H 'Content-Type: application/json'
+
+{
+  "id": "0",
+  "jsonrpc": "2.0",
+  "result": {
+    "address": "es1mKBK2N7jH8E9e1etpLC9ytYugEbXAiGCGJfaZr2h24xsMYdHXQWsVHkG7YtTrLECXpvy76tVXBFyy73GRX51S28PxAqc5Y",
+    "address_index": 1
+  }
+}
+</code></pre>
+</div>
+
+<hr class="full-hr">
+<h3 id="getaddress"><strong>getaddress</strong></h3>
+<p>Get all address from account</p>
+<p>Inputs: </p>
+<ul>
+  <li><em>account_index</em> - index of sub account</li>
+</ul>
+<p>Outputs:</p>
+<ul>
+  <li><em>address</em> - Main address of account (address at index 0)</li>
+  <li><em>addresses</em>- List of sub address with detail information</li>
+</ul>
+<p>Example:</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>
+curl -X POST http://127.0.0.1:8888/json_rpc \
+-d '{"jsonrpc":"2.0","id":"0","method":"getaddress","params":{"account_index": 1}}' \
+-H 'Content-Type: application/json'
+
+{
+  "id": "0",
+  "jsonrpc": "2.0",
+  "result": {
+    "address": "es2tZAJogQa97dUJg4DjM9QWYEHD4JXmphJRVKRySVgrXP2FbdYvFCFgVwfPJR43skJKmJNg4ERs4Buj4jEG9hUf1tSb5hS11",
+    "addresses": [{
+      "address": "es2tZAJogQa97dUJg4DjM9QWYEHD4JXmphJRVKRySVgrXP2FbdYvFCFgVwfPJR43skJKmJNg4ERs4Buj4jEG9hUf1tSb5hS11",
+      "address_index": 0,
+      "label": "user1",
+      "used": false
+    },{
+      "address": "es1mKBK2N7jH8E9e1etpLC9ytYugEbXAiGCGJfaZr2h24xsMYdHXQWsVHkG7YtTrLECXpvy76tVXBFyy73GRX51S28PxAqc5Y",
+      "address_index": 1,
+      "label": "user1 first sub address",
+      "used": false
+    }]
+  }
+}
+</code></pre>
+</div>
+
+
+<hr class="full-hr">
+<h3 id="transfer"><strong>Transfer</strong></h3>
+<p>Send edollar to a number of recipients.</p>
+<p>Inputs</p>
+<ul>
+    <li><em>account_index</em> - unsigned int, index of account to be spent</li>
+    <li><em>subaddr_indices</em> - Array of sub address index to be spent. If not specified, all sub address may be used</li>
+    <li><em>destinations</em> - array of destinations to receive EDL</li>
+    <ul>
+      <li><em>amount</em> - unsigned int, Amount to send to each destination, in atomic units.</li>
+      <li><em>address</em> - string, Destination public address.</li> 
+    </ul>  
+    <li><em>mixin</em> -  unsigned int, Number of outputs from the blockchain to mix (dafault: 4)</li>
+    <li><em>unlock_time</em> - unsigned int, Number of blocks before the EDL can be spent (0 to not add a lock).</li>
+    <li><em>get_tx_key</em> - boolean, (Optional) Return the transaction key after sending</li>
+    <li><em>priority</em> - unsigned int, Set a priority for the transaction. Accepted Values are: 0-3 for: default, unimportant, normal, elevated, priority.</li>
+    <li><em>do_not_relay</em> - boolean, (Optional) If true, the newly created transaction will not be relayed to the edollar network. (Defaults to false)</li>
+    <li><em>get_tx_hex</em> - boolean, Return the transaction as hex string after sending</li>
+</ul>
+<p>Outputs</p>
+<ul>
+    <li><em>fee</em> - Integer value of the fee charged for the txn.</li>
+    <li><em>tx_hash</em> - String for the publically searchable transaction hash</li>
+    <li><em>tx_key</em> - String for the transaction key if get_tx_key is true, otherwise, blank string.</li>
+    <li><em>tx_blob</em> - Transaction as hex string if get_tx_hex is true
+    </li>
+</ul>
+<p>Example:</p>
+<div class="highlighter-rouge"><pre class="highlight">
+<code>
+curl -X POST http://127.0.0.1:8888/json_rpc \
+-d '{"jsonrpc":"2.0","id":"0","method":"transfer","params":{"account_index": 1, "destinations":[{"amount":5000000000,"address":"edqKUGWa84y752hbSMyzQU268JQW7NdJ4ZgT4WTWChjBhhpeYHKTDBi3KrhRbQGk3qBHWnG3UyWpk66ea7AJLmUY2iqTozWX4"},{"amount":2000000000,"address":"es3a5YwWNKWSPHwxX9XEcvFWpdfGZE8LKYnZ4stKdscYG4jJP51RQTZ9G14AHojtTEQVyLCxxr6eQQDNxbQyyEHR31jqBYBkn"}], "get_tx_key": true}}' \
+-H 'Content-Type: application/json'
+
+{
+  "id": "0",
+  "jsonrpc": "2.0",
+  "result": {
+    "fee": 18400000,
+    "tx_blob": "",
+    "tx_hash": "9bac9dc9e5dcc1372b78790cccfcd173bf0bb14f781f8778dd1c307d517b2ec8",
+    "tx_key": "4d531c1ac2b464e59b036943b125a02fce66ce00d512521fec094dea3ca63406"
+  }
+}
+
+</code></pre>
+</div>
+
+
+<hr class="full-hr">
+<h3 id="sweep_all"><strong>sweep_all</strong></h3>
+<p>Send all unlocked balance to an address.</p>
+<p>Inputs</p>
+<ul>
+    <li><em>account_index</em> - unsigned int, index of account to be spent</li>
+    <li><em>subaddr_indices</em> - Array of sub address index to be spent. If not specified, all sub address may be used</li>
+    <li><em>address</em> - string, Destination public address.</li>
+    <li><em>mixin</em> -  unsigned int, Number of outputs from the blockchain to mix (dafault: 4)</li>
+    <li><em>unlock_time</em> - unsigned int, Number of blocks before the EDL can be spent (0 to not add a lock).</li>
+    <li><em>get_tx_keys</em> - boolean, (Optional) Return the transaction keys after sending</li>
+    <li><em>priority</em> - unsigned int, Set a priority for the transaction. Accepted Values are: 0-3 for: default, unimportant, normal, elevated, priority.</li>
+    <li><em>do_not_relay</em> - boolean, (Optional) If true, the newly created transaction will not be relayed to the edollar network. (Defaults to false)</li>
+    <li><em>get_tx_hex</em> - boolean, Return the transaction as hex string after sending</li>
+</ul>
+<p>Outputs</p>
+<ul>
+    <li><em>tx_hash_list</em> - array of string</li>
+    <li><em>tx_key_list</em> - array of string</li>
+    <li><em>tx_blob_list</em> - array of string</li>
+    </li>
+</ul>
+<p>Example:</p>
+<div class="highlighter-rouge"><pre class="highlight">
+<code>
+curl -X POST http://127.0.0.1:8888/json_rpc \
+-d '{"jsonrpc":"2.0","id":"0","method":"sweep_all","params":{"account_index": 2, "address":"edqKUGWa84y752hbSMyzQU268JQW7NdJ4ZgT4WTWChjBhhpeYHKTDBi3KrhRbQGk3qBHWnG3UyWpk66ea7AJLmUY2iqTozWX4", "get_tx_keys": true}}' \
+-H 'Content-Type: application/json'
+
+{
+  "id": "0",
+  "jsonrpc": "2.0",
+  "result": {
+    "tx_hash_list": ["5bc8f4ed0c890a49f6ac7817c17f0fa1cc694b7c742d2f57c76508b3e73b0114"],
+    "tx_key_list": ["b850a3399b14599e2fecf0bb2a92d8d49363be4a5f915cfd6ce6f0154e31fc05"]
+  }
+}
+
+</code></pre>
+</div>
+
+<hr class="full-hr">
+<h3 id="rescan_spent"><strong>rescan_spent</strong></h3>
+<p>Rescan the blockchain for spent outputs.</p>
+<p>Inputs: <em>None</em>.</p>
+<p>Outputs: <em>None</em>.</p>
+<p>Example:</p>
+<div class="highlighter-rouge">
+<pre class="highlight">
+<code>
+curl -X POST http://127.0.0.1:8888/json_rpc \
+-d '{"jsonrpc":"2.0","id":"0","method":"rescan_spent"}' -H 'Content-Type: application/json'
+
+</code>
+</pre>
+</div>
+
+<hr class="full-hr">
+<h3 id="getbalance"><strong>getbalance</strong></h3>
+<p>Return the wallet's balance.</p>
+<p>Inputs: </p>
+<ul>
+    <li><em>account_index</em> - unsigned int; index of account</li>
+  </ul>
+<p>Outputs:</p>
+<ul>
+  <li><em>balance</em> - unsigned int, The total balance of the account</li>
+  <li><em>unlocked_balance</em> - unsigned int, Total unlocked balance of account</li>
+  <li><em>per_subaddress</em> - array, Array of sub address balance (show only sub address with balance > 0)</li>
+</ul>
+
+<p>Example:</p>
+<div class="highlighter-rouge">
+<pre class="highlight">
+<code>
+curl -X POST http://127.0.0.1:8888/json_rpc \
+-d '{"jsonrpc":"2.0","id":"0","method":"getbalance", "params":{"account_index": 1}}' \
+-H 'Content-Type: application/json'
+
+{
+  "id": "0",
+  "jsonrpc": "2.0",
+  "result": {
+    "balance": 12981600000,
+    "per_subaddress": [{
+      "address": "es2tZAJogQa97dUJg4DjM9QWYEHD4JXmphJRVKRySVgrXP2FbdYvFCFgVwfPJR43skJKmJNg4ERs4Buj4jEG9hUf1tSb5hS11",
+      "address_index": 0,
+      "balance": 12981600000,
+      "label": "user1",
+      "num_unspent_outputs": 1,
+      "unlocked_balance": 12981600000
+    }],
+    "unlocked_balance": 12981600000
+  }
+}
+</code>
+</pre>
+</div>
+
+
+<hr class="full-hr">
+<h3 id="incoming_transfers"><strong>incoming_transfers</strong></h3>
+<p>Get received transaction</p>
+<p>Return a list of incoming transfers to the wallet.</p>
+<p>Inputs: </p>
+<ul>
+  <li><em>account_index </em> - unsigned int, index of account we want to get transfers</li>
+  <li><em>transfer_type </em> string, "all": all the transfers, "available": only transfers which are not yet spent, OR "unavailable": only transfers which are already spent.</li>
+  <li><em>subaddr_indices </em> - list of sub address we want to get incoming transfer</li>
+</ul>
+<p>Outputs: <em>transfers</em> - list of:</p>
+<ul>
+ <li><em>amount</em> - unsigned int</li>
+ <li><em>spent</em> - boolean, indicate that transaction has been spent or not</li>
+ <li><em>subaddr_index</em> - index of sub address</li>
+<li><em>global_index</em> - unsigned int; Mostly internal use, can be ignored by most users.</li>
+ <li><em>tx_hash</em> - string; Several incoming transfers may share the same hash if they were in the same transaction.</li>
+<li><em>tx_size</em> - unsigned int</li>
+</ul>
+
+<p>Example:</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>
+curl -X POST http://127.0.0.1:8888/json_rpc \
+-d '{"jsonrpc":"2.0","id":"0","method":"incoming_transfers","params":{"account_index": 1, "transfer_type":"all"}}' \
+-H 'Content-Type: application/json'
+
+{
+  "id": "0",
+  "jsonrpc": "2.0",
+  "result": {
+    "transfers": [{
+      "amount": 20000000000,
+      "global_index": 464034,
+      "spent": true,
+      "subaddr_index": 0,
+      "tx_hash": "8f9870611d98ad65e223902b1e2061e53a0a0747d6fb1ccf6ca32ebee5ebed62",
+      "tx_size": 336
+    },{
+      "amount": 12981600000,
+      "global_index": 464494,
+      "spent": false,
+      "subaddr_index": 0,
+      "tx_hash": "9bac9dc9e5dcc1372b78790cccfcd173bf0bb14f781f8778dd1c307d517b2ec8",
+      "tx_size": 286
+    }]
+  }
+}
+</code></pre>
+</div>
+
+<hr class="full-hr">
+<h3 id="get_transfers"><strong>get_transfers</strong></h3>
+<p>Returns a list of received/sent/pending/pool transaction.</p>
+<p>Inputs: </p>
+<ul>
+<li><em>account_index</em> - unsigned int, index of sub account we want to get transfers</li>
+<li><em>in</em> - boolean, If set to true, return a list of incomming transaction to this account_index</li>
+<li><em>out</em> - boolean, If set to true, return a list of outgoing transaction from this account_index</li>
+<li><em>pending</em> - boolean, If set to true, return a list of pending transaction sent from this account_index</li>
+<li><em>pool</em> - boolean, If set to true, return a list of received transaction in mempool to this account_index</li>
+<li><em>filter_by_height</em> - boolean; If set to true, result will be filtered from min_height to max_height</li>
+<li><em>min_height</em> - unsigned int;</li>
+<li><em>max_height</em> - unsigned int;</li>
+
+</ul>
+<p>Outputs:</p>
+<ul>
+<li><em>in</em>  - array of incoming transaction (received transaction)</li>
+<li><em>out</em> - array of outgoing transaction (sent transaction)</li>
+<li><em>pending</em> - array of pending transaction (sent transaction with no confirmation)</li>
+<li><em>pool</em> - array of pool transaction (received transaction in mempool)</li>
+<li><em>txid</em> - string, transaction id</li>
+<li><em>height</em> - unsigned int, block height</li>
+<li><em>timestamp</em> - unsigned int, timestamp</li>
+<li><em>amount</em> - unsigned int;</li>
+<li><em>fee</em> - unsigned int;</li>
+<li><em>note</em> - string</li>
+<li><em>subaddr_index</em> - object of:
+  <ul>
+    <li><em>major</em> - unsigned int, The sub account index. It is the account_index in input</li>
+    <li><em>minor</em> - unsigned int, The sub address index of current account</li>
+  </ul>
+</li>
+<li><em>destinations</em> - array of recipients in format {address, amount} (outgoing transaction only)</li>
+<li><em>type</em> - string
+  <ul>
+      <li><em>in</em> - incoming transaction (received transaction)</li>
+      <li><em>out</em> - outgoing transaction (sent transaction)</li>
+      <li><em>pending</em> - pending transaction (sent transaction with no confirmation)</li>
+      <li><em>pool</em> - transaction in mempool (received transaction in mempool)</li>
+  </ul>
+</li>
+</ul>
+
+<p>Example: Get all incoming and outgoing transaction of account at index 1</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>
+curl -X POST http://127.0.0.1:8888/json_rpc \
+-d '{"jsonrpc":"2.0","id":"0","method":"get_transfers","params":{"account_index": 1, "in": true, "out":true}}' \
+-H 'Content-Type: application/json'
+
+{
+  "id": "0",
+  "jsonrpc": "2.0",
+  "result": {
+    "in": [{
+      "amount": 20000000000,
+      "fee": 0,
+      "height": 44333,
+      "note": "",
+      "subaddr_index": {
+        "major": 1,
+        "minor": 0
+      },
+      "timestamp": 1519362383,
+      "txid": "8f9870611d98ad65e223902b1e2061e53a0a0747d6fb1ccf6ca32ebee5ebed62",
+      "type": "in",
+      "unlock_time": 0
+    }],
+    "out": [{
+      "amount": 7000000000,
+      "destinations": [{
+        "address": "edqKUGWa84y752hbSMyzQU268JQW7NdJ4ZgT4WTWChjBhhpeYHKTDBi3KrhRbQGk3qBHWnG3UyWpk66ea7AJLmUY2iqTozWX4",
+        "amount": 5000000000
+      },{
+        "address": "es3a5YwWNKWSPHwxX9XEcvFWpdfGZE8LKYnZ4stKdscYG4jJP51RQTZ9G14AHojtTEQVyLCxxr6eQQDNxbQyyEHR31jqBYBkn",
+        "amount": 2000000000
+      }],
+      "fee": 18400000,
+      "height": 44413,
+      "note": "",
+      "subaddr_index": {
+        "major": 1,
+        "minor": 0
+      },
+      "timestamp": 1519373697,
+      "txid": "9bac9dc9e5dcc1372b78790cccfcd173bf0bb14f781f8778dd1c307d517b2ec8",
+      "type": "out",
+      "unlock_time": 0
+    }]
+  }
+}
+</code></pre>
+</div>
+
+<hr class="full-hr">
+<h3 id="get_transfer_by_txid"><strong>get_transfer_by_txid</strong></h3>
+<p>Show information about a transfer of txid</p>
+<p>Inputs: </p>
+<ul>
+  <li><em>txid</em> - string, transaction id</li>
+</ul>
+<p>Outputs: <em>transfer</em> - JSON object containing following information:</p>
+<ul>
+<li><em>amount</em> - unsigned int, total amount of transfer</li>
+<li><em>destinations</em> - array of recipients in format {address, amount} (in outgoing transaction only)</li>
+<li><em>fee</em> - unsigned int, transaction fee (in outgoing transaction only)</li>
+<li><em>height</em> - unsigned int, block height</li>
+<li><em>note</em> - string, a note of this transaction</li>
+<li><em>subaddr_index</em> - object of:
+  <ul>
+    <li><em>major</em> - unsigned int, The sub account index</li>
+    <li><em>minor</em> - unsigned int, The sub address index of current account</li>
+  </ul>
+</li>
+<li><em>timestamp</em> - unsigned int, timestamp</li>
+<li><em>txid</em> - string, transaction id</li>
+<li><em>type</em> - string
+  <ul>
+      <li><em>in</em> - incoming transaction (received transaction)</li>
+      <li><em>out</em> - outgoing transaction (sent transaction)</li>
+      <li><em>pending</em> - pending transaction (sent transaction with no confirmation)</li>
+      <li><em>pool</em> - transaction in mempool (received transaction in mempool)</li>
+  </ul>
+</li>
+</ul>
+<p>Example:</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>
+curl -X POST http://127.0.0.1:8888/json_rpc \
+-d '{"jsonrpc":"2.0","id":"0","method":"get_transfer_by_txid","params":{"txid":"9bac9dc9e5dcc1372b78790cccfcd173bf0bb14f781f8778dd1c307d517b2ec8"}}' \
+-H 'Content-Type: application/json'
+
+{
+  "id": "0",
+  "jsonrpc": "2.0",
+  "result": {
+    "transfer": {
+      "amount": 7000000000,
+      "destinations": [{
+        "address": "edqKUGWa84y752hbSMyzQU268JQW7NdJ4ZgT4WTWChjBhhpeYHKTDBi3KrhRbQGk3qBHWnG3UyWpk66ea7AJLmUY2iqTozWX4",
+        "amount": 5000000000
+      },{
+        "address": "es3a5YwWNKWSPHwxX9XEcvFWpdfGZE8LKYnZ4stKdscYG4jJP51RQTZ9G14AHojtTEQVyLCxxr6eQQDNxbQyyEHR31jqBYBkn",
+        "amount": 2000000000
+      }],
+      "fee": 18400000,
+      "height": 44413,
+      "note": "",
+      "subaddr_index": {
+        "major": 1,
+        "minor": 0
+      },
+      "timestamp": 1519373697,
+      "txid": "9bac9dc9e5dcc1372b78790cccfcd173bf0bb14f781f8778dd1c307d517b2ec8",
+      "type": "out",
+      "unlock_time": 0
+    }
+  }
+}
+</code></pre>
+</div>
+
+<!-- entry start -->
+
+<!-- entry end -->
+
+
+
+</div><!-- col -->
+</div><!-- row -->
+    </section>
+<!-- guide -->
+    
+<div class="footer" id="tool" >
+  <div class="container">
+    <div class="row">
+        <div class="col-lg-4 text-center">
+          <i class="fa fa-anchor tool"> Mining Pool</i>
+          <p class="tool-item">
+            <a target="_blank" href="http://pool.electronicdollar.org/" class="white-color">Official pool (1)</a>
+          </p>
+          <p class="tool-item"p>
+            <a target="_blank" href="https://pool.Edollar.cash" class="white-color">Official pool (2)</a>
+            </p>
+          </p>
+          <p class="tool-item">
+            <a target="_blank" href="https://pool.Edollar.cash" class="white-color">Others pools</a>
+          </p>
+        </div>
+        <div class="col-lg-4 text-center">
+          <i class="fa fa-cubes tool"> Block Explorer</i>
+          <p class="tool-item">
+            <a target="_blank" href="https://explorer.Edollar.cash" class="white-color">https://explorer.Edollar.cash</a>
+          </p>
+        </div>
+        <div class="col-lg-4 text-center">
+            <i class="fa fa-address-card-o tool"> Generate Wallet</i>
+            <p class="tool-item">
+              <a target="_blank" href="https://Edollar.cash/wallet_generator.html" class="white-color">Generate Online</a>
+            </p>
+            <p class="tool-item">
+                <a target="_blank" href="https://github.com/Edollar-project/Edollar-wallet-generator" class="white-color">Generate Offline</a>
+              </p>
+          </div>
+    </div>
+  </div>
+  <div class="copy-right">copyright © 2017 Edollar project</div>
+  
+</div>
+    <!-- Bootstrap core JavaScript -->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Plugin JavaScript -->
+    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+    <script src="vendor/scrollreveal/scrollreveal.min.js"></script>
+    <script src="vendor/magnific-popup/jquery.magnific-popup.min.js"></script>
+
+    <!-- Custom scripts for this template -->
+    <script src="js/creative.min.js"></script>
+
+  </body>
+
+</html>
