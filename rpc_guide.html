@@ -131,7 +131,7 @@
 </div>
 <br/>
 
-<h4 id="start"><strong>Start rpc wallet</strong></h3>
+<h4 id="start"><strong>Start rpc wallet</strong></h4>
 <code>./edollar-wallet-rpc --wallet-dir mydirectory --rpc-bind-port 8888</code>
 <div class="row" style="margin-left: 10px">
   We can also specify which wallet to open 
@@ -152,6 +152,41 @@ curl -u username:password --digest -X POST http://127.0.0.1:8888/json_rpc -d '{"
 </div>
 <div class="row" style="margin-left: 10px">
   For simplicity, we disable rpc login in all following examples
+</div>
+</br>
+<h4 id="wallet-notification"><strong>Wallet Notification</strong></h4>
+<div class="row" style="margin-left: 10px">
+  We can get transaction notification and block notification if run wallet-rpc with following flag
+</div>
+<code>./edollar-wallet-rpc --notify-transaction syscall_command </code><div></div>
+<code>./edollar-wallet-rpc --notify-pool-transaction syscall_command </code><div></div>
+<code>./edollar-wallet-rpc --notify-block syscall_command </code><div></div>
+<div class="row" style="margin-left: 10px">
+  <i>syscall_command </i> is the system command that will be exected, the first argument is the txid/block_hash 
+  <ul>
+    <li><i>--notify-transaction</i>: call syscall_command when wallet received money (transaction has been added to block), first argument is txid of transaction</li>
+    <li><i>--notify-pool-transaction</i>: call syscall_command when wallet received money but transaction is still in the mempool (transaction is waiting to be mined), first argument is txid of transaction</li>
+    <li><i>--notify-block</i>: call syscall_command whenever new block generated, first argument is the block hash</li>
+  </ul>
+  Example
+  <code>./edollar-wallet-rpc --wallet-file mywallet --rpc-bind-port 8888 --notify-transaction /home/ubuntu/tx_notify.sh</code>
+</div>
+<div class="row" style="margin-left: 10px">
+  Where tx_notify.sh looks like
+</div>
+<div class="highlighter-rouge">
+  <pre class="highlight">
+  <code>
+      #!/bin/bash 
+      #remember to add the shabeng above
+      txid=$1
+      echo "Wallet received money, txid = $txid" >> transaction.txt
+  </code>
+  </pre>
+</div>
+<div class="row" style="margin-left: 10px">
+  This will write txid to transaction.txt file everytime wallet received money
+  <p>Note that the wallet notification is available on <strong>exchange-spport</strong> branch only. The pre-build wallet does not have this feature</p>
 </div>
 
 </br>
@@ -175,6 +210,7 @@ curl -u username:password --digest -X POST http://127.0.0.1:8888/json_rpc -d '{"
 </div>
 <div class="col ">
 <ul class="rpc-index">
+  <li><a href="#verify_address">verify_address</a></li>
   <li><a href="#transfer">transfer</a></li>
   <li><a href="#sweep_all">sweep_all</a></li>
   <li><a href="#rescan_spent">rescan_spent</a></li>
@@ -183,6 +219,7 @@ curl -u username:password --digest -X POST http://127.0.0.1:8888/json_rpc -d '{"
 <div class="col" style="margin-right: 30px">
 <ul class="rpc-index">
   <li><a href="#getbalance">getbalance</a></li> 
+  <li><a href="#get_total_balance">get_total_balance</a></li> 
   <li><a href="#incoming_transfers">incoming_transfers</a></li>
   <li><a href="#get_transfers">get_transfers</a></li>
   <li><a href="#get_transfer_by_txid">get_transfer_by_txid</a></li> 
@@ -392,8 +429,39 @@ curl -X POST http://127.0.0.1:8888/json_rpc \
 </div>
 
 
+
 <hr class="full-hr">
-<h3 id="transfer"><strong>Transfer</strong></h3>
+<h3 id="verify_address"><strong>verify_address</strong></h3>
+<p>Send edollar to a number of recipients.</p>
+<p>Inputs</p>
+<ul>
+    <li><em>address</em> - string, the address need to be verified</li>
+</ul>
+<p>Outputs</p>
+<ul>
+    <li><em>valid</em> - bool, true if address is valid, otherwise false</li>
+</ul>
+<p>Example:</p>
+<div class="highlighter-rouge"><pre class="highlight">
+<code>
+curl -X POST http://127.0.0.1:8888/json_rpc \
+-d '{"jsonrpc":"2.0","id":"0","method":"verify_address","params":{"address": "es2tZAJogQa97dUJg4DjM9QWYEHD4JXmphJRVKRySVgrXP2FbdYvFCFgVwfPJR43skJKmJNg4ERs4Buj4jEG9hUf1tSb5hS11"}}' \
+-H 'Content-Type: application/json'
+
+{
+  "id": "0",
+  "jsonrpc": "2.0",
+  "result": {
+    "valid": true
+  }
+}
+
+</code></pre>
+</div>
+
+
+<hr class="full-hr">
+<h3 id="transfer"><strong>transfer</strong></h3>
 <p>Send edollar to a number of recipients.</p>
 <p>Inputs</p>
 <ul>
@@ -534,6 +602,37 @@ curl -X POST http://127.0.0.1:8888/json_rpc \
       "unlocked_balance": 12981600000
     }],
     "unlocked_balance": 12981600000
+  }
+}
+</code>
+</pre>
+</div>
+
+
+<hr class="full-hr">
+<h3 id="get_total_balance"><strong>get_total_balance</strong></h3>
+<p>Return the total wallet's balance.</p>
+<p>Inputs: None</p> 
+<p>Outputs:</p>
+<ul>
+  <li><em>balance</em> - unsigned int, The total balance of wallet</li>
+  <li><em>unlocked_balance</em> - unsigned int, Total unlocked balance wallet</li>
+</ul>
+
+<p>Example:</p>
+<div class="highlighter-rouge">
+<pre class="highlight">
+<code>
+curl -X POST http://127.0.0.1:8888/json_rpc \
+-d '{"jsonrpc":"2.0","id":"0","method":"get_total_balance", "params":{}' \
+-H 'Content-Type: application/json'
+
+{
+  "id": "0",
+  "jsonrpc": "2.0",
+  "result": {
+    "balance": 21000000000,
+    "unlocked_balance": 21000000000
   }
 }
 </code>
